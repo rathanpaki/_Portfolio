@@ -81,9 +81,19 @@ const About = () => (
 );
 
 const ProjectCard = ({ title, description, link }) => (
-  <div className="project-card" onClick={() => window.open(link, "_blank")}>
+  <div className="project-card">
     <h3 className="project-title">{title}</h3>
     <p className="project-description">{description}</p>
+    <button
+      className="view-button"
+      onClick={(e) => {
+        e.stopPropagation();
+        window.open(link, "_blank");
+      }}
+      aria-label={`View ${title}`}
+    >
+      View
+    </button>
   </div>
 );
 
