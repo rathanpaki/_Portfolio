@@ -4,6 +4,7 @@ import Button from "./button";
 import "./App.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import profileImg from "./img.png"; // added import
 
 const useInView = () => {
   const ref = useRef();
@@ -65,12 +66,17 @@ const Hero = () => (
 
 const About = () => (
   <SectionWrapper className="about-section" id="about">
-    <h2 className="section-title">About Me</h2>
-    <p className="section-description">
-      I'm Paki, an aspiring software engineer passionate about building digital
-      solutions. My projects, We Care and EcoGifts, focus on tech for healthcare
-      and sustainability. Always exploring new technologies!
-    </p>
+    <div className="about-container">
+      <img src={profileImg} alt="Profile" className="about-image" />
+      <div className="about-text">
+        <h2 className="section-title">About Me</h2>
+        <p className="section-description">
+          I'm Paki, an aspiring software engineer passionate about building
+          digital solutions. My projects, We Care and EcoGifts, focus on tech
+          for healthcare and sustainability. Always exploring new technologies!
+        </p>
+      </div>
+    </div>
   </SectionWrapper>
 );
 

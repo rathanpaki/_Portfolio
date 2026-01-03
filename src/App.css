@@ -116,17 +116,114 @@ body {
   z-index: 1;
 }
 
-.section-title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 2;
+.about-section .about-container {
+  display: flex;
+  align-items: center; 
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
+.about-image {
+  width: 320px;
+  height: 500px; 
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 18px rgba(0, 255, 249, 0.12),
+    0 0 34px rgba(0, 255, 249, 0.06);
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  filter: drop-shadow(0 10px 20px rgba(0, 255, 249, 0.08));
+}
+
+/* blurred/pulsing neon glow behind image */
+.about-image::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 255, 249, 0.18),
+    rgba(0, 255, 249, 0.06) 30%,
+    transparent 60%
+  );
+  filter: blur(22px);
+  border-radius: 50%;
+  z-index: 1; 
+  pointer-events: none;
+  animation: pulseGlow 3s ease-in-out infinite;
+  opacity: 0.95;
+}
+
+/* pulse animation for the glow */
+@keyframes pulseGlow {
+  0% {
+    transform: translate(-50%, -50%) scale(0.98);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+/* scale glow down on medium/small screens */
+@media (max-width: 992px) {
+  .about-image::after {
+    width: 140%;
+    height: 140%;
+    filter: blur(18px);
+  }
+}
+@media (max-width: 768px) {
+  .about-image {
+    width: 160px;
+    height: 160px;
+  }
+  .about-image::after {
+    width: 220%;
+    height: 220%;
+    filter: blur(28px);
+  }
+}
+
+/* About Text Styles */
+.about-text {
+  flex: 1;
+  text-align: center; /* center heading & paragraph inside the text container */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+.about-text .section-title {
+  margin-top: 0;
+  margin-bottom: 6px; /* reduce space under title */
+}
+
+/* tighten underline for About section */
+.about-section .section-title::after {
+  bottom: -6px; /* smaller gap between title and underline */
+  width: 40px;
+}
+
+/* remove global centering so sections inherit alignment where needed */
 .section-description {
   font-size: 1.2rem;
   max-width: 800px;
-  text-align: center;
+  /* text-align removed to let .about-text control alignment */
   position: relative;
   z-index: 2;
 }
@@ -270,6 +367,12 @@ body {
 
   .project-card {
     padding: 1.5rem;
+  }
+
+  .about-section .about-container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
   }
 }
 
